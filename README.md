@@ -4,14 +4,14 @@ A self-made screencasting application built in Python. This basically applies th
 ### Requirements
 
 * Python3
-* pyscreenshot
+* scrot
 * ffmpeg
 
 ### Explanation
 
 #### screenshot.py
 
-This program is used to take the screenshots continuously for an interval of time given as an input.
+This program is used to take the screenshots continuously for an interval of time given as an input argument.
 
 #### move.sh
 
@@ -19,7 +19,11 @@ A Shell script to move the video from the Screenshots directory to the Videos di
 
 ### To run the entire application
 
-Just run **sudo bash run.sh**
+Just run 
+```
+./run.sh x
+```
+Where x is the time of capture in seconds.
 
 ### Future improvements
 

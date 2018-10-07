@@ -1,16 +1,31 @@
-import pyscreenshot 
+import os
+import sys
+import threading
 import time
-k=0
-i=0
-n=input("Enter Time: ")
-type(n)
-start=time.time()
-if __name__=="__main__":
-	
-	while i<=int(n):
-		im=pyscreenshot.grab()
+import threading
+class Screenshot:
+	def __init__(self, RUNTIME):
+		self.r=RUNTIME
+		self.start=time.time()
+		self.stop=time.time()
+		self.k=0
+		
+	def capture(self, k):
+		#evt=threading.Event()
 		s="./Screenshots/Screenshot"+str(k)+".png"
-		im.save(s)
-		k=k+1
-		i=time.time()-start
-print(str(time.time()-start))
+		os.system("scrot "+s)
+		#evt.set()
+		
+	def begin(self):
+		while True:
+			time.sleep(0.1)
+			p=threading.Thread(target=self.capture, args=(self.k, ))
+			p.daemon = True
+			p.start()
+			self.stop=time.time()
+			self.k+=1
+			if int(self.stop-self.start)>int(self.r):
+				break
+if __name__=="__main__":
+	obj=Screenshot(sys.argv[1])
+	obj.begin()
